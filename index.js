@@ -10,31 +10,22 @@ function extractLinks(text){
     arrayResults.push({ [temp[1]]: temp[2] })
   }
   
-  return arrayResults;
+  return arrayResults.length == 0 ? "There isn't links": arrayResults;
 }
 
 function handlesError(error) {
   throw new Error(chalk.red(error.code, "There isn't file in the path"));
 }
 
-async function takeFile(path) {
+export async function takeFile(path) {
   const encoding = 'utf-8';
   try {
     const text = await promises.readFile(path, encoding)
-    console.log(extractLinks(text))
+    return extractLinks(text)
   } catch(error) {
     handlesError(error);
   }
 }
-
-
-takeFile('./arquivos/texto1.md');
-
-
-
-
-
-
 
 /* UTILIZANDO OUTROS METODOS ANTIGOS  */
 // function takeFile(path) {
