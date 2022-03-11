@@ -1,22 +1,7 @@
 import chalk from 'chalk';
 import {promises} from "fs"
 
-function extractLinks(text){
-  const regex = /\[([^\]]*)\]\((https?:\/\/[^$#\s].[^\s]*)\)/gm
-
-  const arrayResults = []
-  let temp;
-  while((temp = regex.exec(text)) !== null) {
-    arrayResults.push({ [temp[1]]: temp[2] })
-  }
-  
-  return arrayResults.length == 0 ? "There isn't links": arrayResults;
-}
-
-function handlesError(error) {
-  throw new Error(chalk.red(error.code, "There isn't file in the path"));
-}
-
+// Takes the text and returns an array with keys (description of links) and values ​​(links)
 export async function takeFile(path) {
   const encoding = 'utf-8';
   try {
@@ -27,7 +12,27 @@ export async function takeFile(path) {
   }
 }
 
-/* UTILIZANDO OUTROS METODOS ANTIGOS  */
+// EXTRACT LINKS
+function extractLinks(text){
+  // creating links regex 
+  const regex = /\[([^\]]*)\]\((https?:\/\/[^$#\s].[^\s]*)\)/gm
+
+  const arrayResults = []
+  let temp;
+  // condition to get all text links from regex
+  while((temp = regex.exec(text)) !== null) {
+    arrayResults.push({ [temp[1]]: temp[2] })
+  }
+  
+  return arrayResults.length == 0 ? "There isn't links": arrayResults;
+}
+
+// ERROR
+function handlesError(error) {
+  throw new Error(chalk.red(error.code, "There isn't file in the path"));
+}
+
+/* USING OLD METHODS  */
 // function takeFile(path) {
 //   const encoding = 'utf-8';
 //   promises
