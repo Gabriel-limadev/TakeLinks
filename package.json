@@ -9,6 +9,7 @@
     "cli": "node cli.js ./files/text.md"
   },
   "dependencies": {
-    "chalk": "^5.0.1"
+    "chalk": "^5.0.1",
+    "node-fetch": "^3.2.2"
   }
 }
